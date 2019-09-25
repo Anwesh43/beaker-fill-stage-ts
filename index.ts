@@ -2,10 +2,10 @@ const colors : Array<String> = ["#673AB7", "#00C853", "#3F51B5", "#f44336", "#0D
 const scGap : number = 0.01
 const backColor : string = "#BDBDBD"
 const strokeFactor : number = 90
-const delay : number = 50
+const delay : number = 40
 const w : number = window.innerWidth
 const h : number = window.innerHeight
-const sizeFactor : number = 5
+const sizeFactor : number = 7
 
 class BeakerFillStage {
 
@@ -49,7 +49,7 @@ class ScaleUtil {
     }
 
     static divideScale(scale : number, i : number, n : number) : number {
-        return Math.min(1 / n, ScaleUtil.divideScale(scale, i, n)) * n
+        return Math.min(1 / n, ScaleUtil.maxScale(scale, i, n)) * n
     }
 }
 
@@ -78,8 +78,8 @@ class DrawingUtil {
         context.fillStyle = colors[i]
         context.strokeStyle = colors[i]
         context.save()
-        context.translate(-size + (w / 2 + size / 2) * sc1 + (w / 2 - size / 2) * sc3, 9 * h / 10)
-        DrawingUtil.drawBeaker(context, size, 2 * size)
+        context.translate(-1.5 * size + (w / 2 + size) * sc1 + (w / 2 + size * 0.6) * sc3, 9 * h / 10)
+        DrawingUtil.drawBeaker(context, 1.4 * size, size)
         DrawingUtil.drawFillRect(context, sc2, size)
         context.restore()
     }
