@@ -191,3 +191,25 @@ class BeakerFill {
         this.curr.startUpdating(cb)
     }
 }
+
+class Renderer {
+
+    bf : BeakerFill = new BeakerFill()
+    animator : Animator = new Animator()
+
+    render(context : CanvasRenderingContext2D) {
+        this.bf.draw(context)
+    }
+
+    handleTap(cb : Function) {
+        this.bf.startUpdating(() => {
+            this.animator.start(() => {
+                cb()
+                this.bf.update(() => {
+                    this.animator.stop()
+                    cb()
+                })
+            })
+        })
+    }
+}
